@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SRDF macro definitions for the ABB CRB 15000‑5/0.95 MoveIt configuration.
+
+  The macro defined here specifies the manipulator group, an "all_zero"
+  named configuration and disables collision checking for pairs of adjacent
+  links.  These settings were derived from the IRB‑1200 template and
+  updated to reflect the CRB 15000 naming scheme.
+-->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- Define a macro that writes the SRDF entries.  When this macro is
+       expanded in the top‑level SRDF file it will emit group, joint
+       configuration, virtual joint and collision settings. -->
+  <xacro:macro name="abb_crb15000_5_95_srdf">
+    <!-- Define the single planning group.  MoveIt will know that
+         trajectories should be planned from base_link to tool0. -->
+    <group name="manipulator">
+      <chain base_link="base_link" tip_link="tool0" />
+    </group>
+
+    <!-- Define a named joint state where all joints are at zero.  This
+         assists in visualising a default configuration and is used by
+         planners to seed trajectories. -->
+    <group_state name="all_zero" group="manipulator">
+      <joint name="joint_1" value="0" />
+      <joint name="joint_2" value="0" />
+      <joint name="joint_3" value="0" />
+      <joint name="joint_4" value="0" />
+      <joint name="joint_5" value="0" />
+      <joint name="joint_6" value="0" />
+    </group_state>
+
+    <!-- Associate the robot with the world.  A floating virtual joint is
+         used so the robot’s base_link can be placed freely in space. -->
+    <virtual_joint type="floating" parent_frame="world" child_link="base_link" />
+
+    <!-- Disable collision checking for adjacent links.  By default MoveIt
+         assumes any link can collide with any other; specifying
+         these pairs improves performance by ignoring obvious contacts. -->
+    <disable_collisions link1="base_link" link2="link_1" reason="Adjacent" />
+    <disable_collisions link1="link_1" link2="link_2" reason="Adjacent" />
+    <disable_collisions link1="link_2" link2="link_3" reason="Adjacent" />
+    <disable_collisions link1="link_2" link2="link_5" reason="Never" />
+    <disable_collisions link1="link_2" link2="link_6" reason="Never" />
+    <disable_collisions link1="link_3" link2="link_4" reason="Adjacent" />
+    <disable_collisions link1="link_3" link2="link_5" reason="Never" />
+    <disable_collisions link1="link_3" link2="link_6" reason="Never" />
+    <disable_collisions link1="link_4" link2="link_5" reason="Adjacent" />
+    <disable_collisions link1="link_5" link2="link_6" reason="Adjacent" />
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SRDF definition for the ABB CRB‑15000‑5/0.95 robot.  This file wraps
+  a macro defined in a separate Xacro file which declares the MoveIt
+  groups, virtual joints and collision reductions.  It mirrors the
+  structure of the IRB‑1200 SRDF but targets the CRB 15000 robot.
+-->
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="abb_crb15000_5_95">
+
+  <!-- Include the macro definition from the config directory -->
+  <xacro:include
+      filename="$(find abb_crb15000_5_95_moveit_config)/config/abb_crb15000_5_95_macro.srdf.xacro"/>
+  <!-- Instantiate the SRDF macro -->
+  <xacro:abb_crb15000_5_95_srdf/>
+
+</robot>

@@ -1,0 +1,31 @@
+# Minimal RViz configuration for the CRB‑15000 MoveIt setup.
+#
+# This file configures a grid and a Motion Planning plugin with the
+# manipulator group selected.  It is intentionally simple; feel free
+# to customise the RViz layout further by loading this file and
+# adjusting panels as desired.
+
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Tool Properties
+    Name: Tool Properties
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+    - Class: moveit_rviz_plugin/MotionPlanning
+      Enabled: true
+      Name: MotionPlanning
+      Planning Group: manipulator
+      Robot Description: robot_description
+      MoveIt_Planning_Time: 5
+      MoveIt_Planning_Attempts: 10
+  Global Options:
+    Fixed Frame: base_link
+    Background Color: 48; 48; 48
+  Name: root
